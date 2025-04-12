@@ -53,4 +53,9 @@ public class MovieRepository : IMovieRepository
     {
         return await _db.Movies.AnyAsync(predicate);
     }
+    
+    public void Update(Movie movie)
+    {
+        _db.Movies.Update(movie);
+    }
 }
