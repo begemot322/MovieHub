@@ -16,4 +16,6 @@ public interface IMovieRepository
     void Remove(Movie movie);
     
     Task<bool> ExistsAsync(Expression<Func<Movie, bool>> predicate);
+
+    void Update(Movie movie);
 }
