@@ -9,6 +9,6 @@ public class Movie
     
     public ICollection<ActorMovie> ActorMovies { get; set; } = new List<ActorMovie>();
     
-    public ICollection<MovieLike> Likes { get; set; } = new List<MovieLike>();
+    public ICollection<MovieLike> MovieLikes { get; set; } = new List<MovieLike>();
 
 }
