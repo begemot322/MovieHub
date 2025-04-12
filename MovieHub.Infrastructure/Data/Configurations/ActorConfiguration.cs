@@ -13,6 +13,10 @@ public class ActorConfiguration : IEntityTypeConfiguration<Actor>
         builder.Property(a => a.Name)
             .IsRequired()
             .HasMaxLength(100);
+        
+        builder.Property(a => a.Surname)
+            .IsRequired()
+            .HasMaxLength(100);
 
         builder.Property(a => a.Bio)
             .HasMaxLength(1000);
