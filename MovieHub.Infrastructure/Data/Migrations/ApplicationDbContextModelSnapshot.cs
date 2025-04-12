@@ -40,9 +40,14 @@ namespace MovieHub.Infrastructure.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Actors");
+                    b.ToTable("Actors", (string)null);
                 });
 
             modelBuilder.Entity("MovieHub.Domain.Entities.ActorLike", b =>
@@ -60,7 +65,7 @@ namespace MovieHub.Infrastructure.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ActorLikes");
+                    b.ToTable("ActorLikes", (string)null);
                 });
 
             modelBuilder.Entity("MovieHub.Domain.Entities.ActorMovie", b =>
@@ -75,7 +80,7 @@ namespace MovieHub.Infrastructure.Data.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("ActorMovies");
+                    b.ToTable("ActorMovies", (string)null);
                 });
 
             modelBuilder.Entity("MovieHub.Domain.Entities.Movie", b =>
@@ -101,7 +106,7 @@ namespace MovieHub.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movies");
+                    b.ToTable("Movies", (string)null);
                 });
 
             modelBuilder.Entity("MovieHub.Domain.Entities.MovieLike", b =>
@@ -119,7 +124,7 @@ namespace MovieHub.Infrastructure.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("MovieLikes");
+                    b.ToTable("MovieLikes", (string)null);
                 });
 
             modelBuilder.Entity("MovieHub.Domain.Entities.User", b =>
@@ -147,7 +152,7 @@ namespace MovieHub.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("MovieHub.Domain.Entities.ActorLike", b =>
