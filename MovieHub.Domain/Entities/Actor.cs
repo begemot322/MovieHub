@@ -8,6 +8,5 @@ public class Actor
     
     public ICollection<ActorMovie> ActorMovies { get; set; } = new List<ActorMovie>();
     
-    public ICollection<ActorLike> Likes { get; set; } = new List<ActorLike>();
-
+    public ICollection<ActorLike> ActorLikes  { get; set; } = new List<ActorLike>();
 }
