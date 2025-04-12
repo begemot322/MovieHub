@@ -1,0 +1,14 @@
+﻿using System.Linq.Expressions;
+using MovieHub.Domain.Entities;
+
+namespace MovieHub.Application.Common.Interfaces.Repositories;
+
+public interface IActorRepository
+{
+    Task<IEnumerable<Actor>> GetAllAsync();
+    Task<Actor?> GetByIdAsync(int id);
+    Task AddAsync(Actor actor);
+    void Remove(Actor actor);
+    Task<bool> ExistsAsync(Expression<Func<Actor, bool>> predicate);
+    Task<List<Actor>> GetByIdsAsync(List<int> ids);
+}
