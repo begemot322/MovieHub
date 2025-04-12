@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MovieHub.Application.Common.Interfaces;
+using MovieHub.Application.Common.Interfaces.Repositories;
 using MovieHub.Infrastructure.Data;
 using MovieHub.Infrastructure.Data.Repositories;
 
@@ -21,6 +23,8 @@ public static class DependencyInjection
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connString));
         
         services.AddScoped<DbInitializer>();
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         
         return services;
     }
