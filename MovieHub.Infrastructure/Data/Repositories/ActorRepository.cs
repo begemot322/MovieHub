@@ -41,6 +41,11 @@ public class ActorRepository : IActorRepository
     {
         _db.Actors.Remove(actor);
     }
+    
+    public void Update(Actor actor)
+    {
+        _db.Actors.Update(actor);
+    }
 
     public async Task<bool> ExistsAsync(Expression<Func<Actor, bool>> predicate)
     {
@@ -52,5 +57,14 @@ public class ActorRepository : IActorRepository
         return await _db.Actors
             .Where(a => ids.Contains(a.Id))
             .ToListAsync();
+    }
+    
+
+    public async Task<IEnumerable<Movie>> GetMoviesByActorIdAsync(int actorId)
+    {
+        return await _db.Movies
+            .Where(m => m.ActorMovies.Any(am => am.ActorId == actorId))
+                .AsNoTracking()  
+            .ToListAsync();  
     }
 }
