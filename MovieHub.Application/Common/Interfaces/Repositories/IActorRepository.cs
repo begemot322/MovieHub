@@ -11,4 +11,6 @@ public interface IActorRepository
     void Remove(Actor actor);
     Task<bool> ExistsAsync(Expression<Func<Actor, bool>> predicate);
     Task<List<Actor>> GetByIdsAsync(List<int> ids);
+    void Update(Actor actor);
+    Task<IEnumerable<Movie>> GetMoviesByActorIdAsync(int id);
 }
