@@ -18,4 +18,5 @@ public interface IMovieRepository
     Task<bool> ExistsAsync(Expression<Func<Movie, bool>> predicate);
 
     void Update(Movie movie);
+    Task<IEnumerable<Actor>> GetActorsByMovieIdAsync(int movieId);
 }
