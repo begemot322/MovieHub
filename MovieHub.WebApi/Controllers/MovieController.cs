@@ -53,4 +53,12 @@ public class MovieController : ControllerBase
         await _movieService.UpdateMovieAsync(id, movieDto);
         return NoContent();
     }
+    
+    [HttpGet("{movieId}/actors")]
+    public async Task<ActionResult<IEnumerable<Actor>>> GetActorsByMovieId(int movieId)
+    {
+        var actors = await _movieService.GetActorsByMovieIdAsync(movieId);
+        
+        return Ok(actors);
+    }
 }
