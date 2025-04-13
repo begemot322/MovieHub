@@ -2,6 +2,7 @@
 using MovieHub.Application.Common;
 using MovieHub.Application.Common.Exceptions;
 using MovieHub.Application.Common.Interfaces;
+using MovieHub.Application.Common.QueryParams;
 using MovieHub.Application.Dtos;
 using MovieHub.Application.Services.Interfaces;
 using MovieHub.Domain.Entities;

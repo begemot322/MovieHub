@@ -1,4 +1,5 @@
 ﻿using MovieHub.Application.Common;
+using MovieHub.Application.Common.QueryParams;
 using MovieHub.Application.Dtos;
 using MovieHub.Domain.Entities;
 

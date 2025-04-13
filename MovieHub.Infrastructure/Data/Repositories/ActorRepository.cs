@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MovieHub.Application.Common;
 using MovieHub.Application.Common.Interfaces.Repositories;
+using MovieHub.Application.Common.QueryParams;
 using MovieHub.Domain.Entities;
 using MovieHub.Infrastructure.Extensions;
 

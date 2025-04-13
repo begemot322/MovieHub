@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using MovieHub.Application.Common;
+using MovieHub.Application.Common.QueryParams;
 using MovieHub.Domain.Entities;
 
 namespace MovieHub.Infrastructure.Extensions;

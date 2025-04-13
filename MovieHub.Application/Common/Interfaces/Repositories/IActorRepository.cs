@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using MovieHub.Application.Common.QueryParams;
 using MovieHub.Domain.Entities;
 
 namespace MovieHub.Application.Common.Interfaces.Repositories;
