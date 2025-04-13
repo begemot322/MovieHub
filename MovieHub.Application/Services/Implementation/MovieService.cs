@@ -3,6 +3,7 @@ using MovieHub.Application.Common;
 using MovieHub.Application.Common.Exceptions;
 using MovieHub.Application.Common.Interfaces;
 using MovieHub.Application.Common.Interfaces.Repositories;
+using MovieHub.Application.Common.QueryParams;
 using MovieHub.Application.Dtos;
 using MovieHub.Application.Filters;
 using MovieHub.Application.Services.Interfaces;
@@ -19,14 +20,15 @@ public class MovieService : IMovieService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<IEnumerable<Movie>> GetAllAsync(MovieFilter? filter = null, SortParams? sortParams = null)
+    public async Task<PagedResult<Movie>> GetAllAsync(MovieFilter? filter = null,
+        SortParams? sortParams = null, PageParams? pageParams = null)
     {
-        var movies = await _unitOfWork.Movies.GetAllAsync(filter, sortParams);
+        var result  = await _unitOfWork.Movies.GetAllAsync(filter, sortParams,pageParams);
 
-        if (!movies.Any())
+        if (!result.Items.Any())
             throw new NotFoundException("Фильмы не найдены");
 
-        return movies;
+        return result;
     }
     
     public async Task<IEnumerable<Actor>> GetActorsByMovieIdAsync(int movieId)

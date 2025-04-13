@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using MovieHub.Application.Common.QueryParams;
 using MovieHub.Application.Filters;
 using MovieHub.Domain.Entities;
 
@@ -6,8 +7,8 @@ namespace MovieHub.Application.Common.Interfaces.Repositories;
 
 public interface IMovieRepository
 {
-    Task<IEnumerable<Movie>> GetAllAsync(MovieFilter? movieFilter = null,
-        SortParams? sortParams = null);
+    Task<PagedResult<Movie>> GetAllAsync(MovieFilter? movieFilter = null,
+        SortParams? sortParams = null, PageParams? pageParams = null);
 
     Task<Movie?> GetByIdAsync(int id);
 

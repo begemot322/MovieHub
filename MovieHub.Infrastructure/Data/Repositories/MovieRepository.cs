@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MovieHub.Application.Common;
 using MovieHub.Application.Common.Interfaces.Repositories;
+using MovieHub.Application.Common.QueryParams;
 using MovieHub.Application.Filters;
 using MovieHub.Domain.Entities;
 using MovieHub.Infrastructure.Extensions;
@@ -17,15 +18,15 @@ public class MovieRepository : IMovieRepository
         _db = db;   
     }
 
-    public async Task<IEnumerable<Movie>> GetAllAsync(MovieFilter? movieFilter = null,
-        SortParams? sortParams = null)
+    public async Task<PagedResult<Movie>> GetAllAsync(MovieFilter? movieFilter = null,
+        SortParams? sortParams = null, PageParams? pageParams = null)
     {
         return await _db.Movies
             .Sort(sortParams)
             .Filter(movieFilter)
             .Include(m => m.MovieLikes)
             .AsNoTracking()
-            .ToListAsync();
+            .TtoPageAsync(pageParams);
     }
     
     public async Task<Movie?> GetByIdAsync(int id)
