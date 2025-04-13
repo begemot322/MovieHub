@@ -24,8 +24,6 @@ public class MovieRepository : IMovieRepository
             .Sort(sortParams)
             .Filter(movieFilter)
             .Include(m => m.MovieLikes)
-            .Include(m => m.ActorMovies)
-                .ThenInclude(am => am.Actor)
             .AsNoTracking()
             .ToListAsync();
     }
@@ -33,9 +31,9 @@ public class MovieRepository : IMovieRepository
     public async Task<Movie?> GetByIdAsync(int id)
     {
         return await _db.Movies
-            .Include(m => m.MovieLikes)
             .Include(m => m.ActorMovies)
-            .ThenInclude(am => am.Actor)
+                .ThenInclude(am => am.Actor)
+            .Include(m=>m.MovieLikes)
             .FirstOrDefaultAsync(m => m.Id == id);
     }
 
@@ -57,5 +55,12 @@ public class MovieRepository : IMovieRepository
     public void Update(Movie movie)
     {
         _db.Movies.Update(movie);
+    }
+    public async Task<IEnumerable<Actor>> GetActorsByMovieIdAsync(int movieId)
+    {
+        return await _db.Actors
+            .Where(a => a.ActorMovies.Any(am => am.MovieId == movieId))
+            .AsNoTracking()
+            .ToListAsync();
     }
 }
