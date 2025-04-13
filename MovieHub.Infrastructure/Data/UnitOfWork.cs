@@ -10,6 +10,7 @@ public class UnitOfWork : IUnitOfWork
     
     private IMovieRepository _movieRepository;
     private IActorRepository _actorRepository;
+    private IUserRepository _userRepository;
 
 
     public UnitOfWork(ApplicationDbContext db)
@@ -22,6 +23,10 @@ public class UnitOfWork : IUnitOfWork
 
     public IActorRepository Actors =>
         _actorRepository ??= new ActorRepository(_db);
+
+    public IUserRepository Users =>
+        _userRepository ??= new UserRepository(_db);
+    
     
     public void Dispose()
     {
