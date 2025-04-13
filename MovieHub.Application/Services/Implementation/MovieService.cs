@@ -28,6 +28,22 @@ public class MovieService : IMovieService
 
         return movies;
     }
+    
+    public async Task<IEnumerable<Actor>> GetActorsByMovieIdAsync(int movieId)
+    {
+        var movie = await _unitOfWork.Movies.GetByIdAsync(movieId);
+
+        if (movie == null)
+            throw new NotFoundException($"Фильм с Id {movieId} не найден");
+        
+        var movieActors = await _unitOfWork.Movies.GetActorsByMovieIdAsync(movieId); 
+    
+        if (!movieActors.Any())
+            throw new NotFoundException($"Фильм с Id {movieId} не найден или в нем нет актеров");
+
+        return movieActors;
+    }
+
 
     public async Task<Movie> GetByIdAsync(int id)
     {
