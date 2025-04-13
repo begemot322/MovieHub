@@ -20,6 +20,8 @@ public static class DependencyInjection
         
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();   
+        
+        services.AddHttpContextAccessor();
 
         return services;
     }
