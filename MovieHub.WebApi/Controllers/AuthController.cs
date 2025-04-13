@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieHub.Application.Dtos.Authentication;
 using MovieHub.Application.Services.Interfaces;
 
@@ -28,6 +29,14 @@ public class AuthController : ControllerBase
         var token = await _userService.LoginAsync(request);
         Response.Cookies.Append("SecurityCookies", token);
         return Ok(token);
+    }
+    
+    [HttpPost("logout")]
+    [Authorize] 
+    public IActionResult Logout()
+    {
+        Response.Cookies.Delete("SecurityCookies");
+        return Ok();
     }
         
 }
