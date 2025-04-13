@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MovieHub.Application.Common;
 using MovieHub.Application.Dtos;
 using MovieHub.Application.Services.Interfaces;
 using MovieHub.Domain.Entities;
@@ -17,9 +18,9 @@ public class ActorController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Actor>>> GetAll()
+    public async Task<ActionResult<IEnumerable<Actor>>> GetAll([FromQuery] SortParams? sortParams)
     {
-        var actors = await _actorService.GetAllAsync();
+        var actors = await _actorService.GetAllAsync(sortParams);
         return Ok(actors);
     }
     
