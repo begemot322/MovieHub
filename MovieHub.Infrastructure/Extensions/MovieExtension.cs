@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using MovieHub.Application.Common;
+using MovieHub.Application.Common.QueryParams;
 using MovieHub.Application.Filters;
 using MovieHub.Domain.Entities;
 
@@ -26,6 +28,24 @@ public static class MovieExtension
             : query.OrderBy(GetKeySelector(sortParams.OrderBy));
     }
 
+    public static async Task<PagedResult<Movie>> TtoPageAsync(this IQueryable<Movie> query, PageParams pageParams)
+    {
+        var page = pageParams.Page ?? 1;
+        var pageSize = pageParams.PageSize ?? 10;
+        
+        var totalCount = await query.CountAsync();
+        
+        if (totalCount == 0)
+            return new PagedResult<Movie>(new List<Movie>(), totalCount, page, pageSize);
+
+        var skip = (page - 1) * pageSize;
+        var items  =  await query.Skip(skip)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return new PagedResult<Movie>(items, totalCount, page, pageSize);
+    }
+    
     private static Expression<Func<Movie, object>> GetKeySelector(string? sortOrderBy)
     {       
         if (string.IsNullOrEmpty(sortOrderBy))
