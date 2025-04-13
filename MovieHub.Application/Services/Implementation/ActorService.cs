@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using MovieHub.Application.Common;
 using MovieHub.Application.Common.Exceptions;
 using MovieHub.Application.Common.Interfaces;
 using MovieHub.Application.Dtos;
@@ -16,9 +17,9 @@ public class ActorService : IActorService
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<IEnumerable<Actor>> GetAllAsync()
+    public async Task<IEnumerable<Actor>> GetAllAsync(SortParams? sortParams = null)
     {
-        var actors = await _unitOfWork.Actors.GetAllAsync();
+        var actors = await _unitOfWork.Actors.GetAllAsync(sortParams);
         
         if (!actors.Any())
             throw new NotFoundException("Актёры не найдены");
