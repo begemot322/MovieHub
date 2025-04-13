@@ -11,6 +11,9 @@ public static class DependencyInjection
         // Сервисы
         services.AddScoped<IMovieService, MovieService>();
         services.AddScoped<IActorService, ActorService>();
+        services.AddScoped<IUserService, UserService>();
+
+        services.AddScoped<ILikeService, LikeService>();
 
         return services;
     }
