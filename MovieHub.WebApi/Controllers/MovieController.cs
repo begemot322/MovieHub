@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieHub.Application.Common;
+using MovieHub.Application.Common.QueryParams;
 using MovieHub.Application.Dtos;
 using MovieHub.Application.Filters;
 using MovieHub.Application.Services.Interfaces;
@@ -19,9 +20,10 @@ public class MovieController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Movie>>> GetAll([FromQuery] MovieFilter? filter, [FromQuery] SortParams? sortParams)
+    public async Task<ActionResult<IEnumerable<Movie>>> GetAll([FromQuery] MovieFilter? filter,
+        [FromQuery] SortParams? sortParams,  [FromQuery] PageParams pageParams)
     {
-        var movies = await _movieService.GetAllAsync(filter, sortParams);
+        var movies = await _movieService.GetAllAsync(filter, sortParams,pageParams);
         return Ok(movies);
     }
 
