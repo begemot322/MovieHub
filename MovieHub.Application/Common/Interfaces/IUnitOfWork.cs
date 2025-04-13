@@ -6,6 +6,7 @@ public interface IUnitOfWork
 {
     IMovieRepository Movies { get; }
     IActorRepository Actors { get; }
+    IUserRepository Users { get; }
     
     Task<int> SaveChangesAsync();
 }
