@@ -1,7 +1,9 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using MovieHub.Application.Common;
 using MovieHub.Application.Common.Interfaces.Repositories;
 using MovieHub.Domain.Entities;
+using MovieHub.Infrastructure.Extensions;
 
 namespace MovieHub.Infrastructure.Data.Repositories;
 
@@ -13,11 +15,10 @@ public class ActorRepository : IActorRepository
     {
         _db = db;
     }
-    public async Task<IEnumerable<Actor>> GetAllAsync()
+    public async Task<IEnumerable<Actor>> GetAllAsync(SortParams? sortParams = null)
     {
         return await _db.Actors
-            .Include(a => a.ActorMovies)
-                .ThenInclude(am => am.Movie)
+            .Sort(sortParams)
             .Include(a => a.ActorLikes)
             .AsNoTracking()
             .ToListAsync();

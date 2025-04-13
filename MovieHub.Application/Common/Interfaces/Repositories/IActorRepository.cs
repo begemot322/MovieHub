@@ -5,7 +5,7 @@ namespace MovieHub.Application.Common.Interfaces.Repositories;
 
 public interface IActorRepository
 {
-    Task<IEnumerable<Actor>> GetAllAsync();
+    Task<IEnumerable<Actor>> GetAllAsync(SortParams? sortParams = null);
     Task<Actor?> GetByIdAsync(int id);
     Task AddAsync(Actor actor);
     void Remove(Actor actor);
