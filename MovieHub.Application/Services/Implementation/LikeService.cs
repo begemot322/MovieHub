@@ -30,7 +30,18 @@ public class LikeService : ILikeService
         user.MovieLikes.Add(new MovieLike { MovieId = movieId, UserId = user.Id, LikedAt = DateTime.UtcNow });
         await _unitOfWork.SaveChangesAsync();
     }
+    public async Task UnlikeMovieAsync(int movieId)
+    {
+        var user = await GetUserWithLikesAsync();
+        
+        var movieLike = user.MovieLikes.FirstOrDefault(ml => ml.MovieId == movieId);
+        if (movieLike == null)
+            throw new NotFoundException("Лайк для этого фильма не найден");
 
+        user.MovieLikes.Remove(movieLike);
+        await _unitOfWork.SaveChangesAsync();
+    }
+    
     public async Task LikeActorAsync(int actorId)
     {
         var user = await GetUserWithLikesAsync();
@@ -46,6 +57,18 @@ public class LikeService : ILikeService
         await _unitOfWork.SaveChangesAsync();
     }
     
+    public async Task UnlikeActorAsync(int actorId)
+    {
+        var user = await GetUserWithLikesAsync();
+        
+        var actorLike = user.ActorLikes.FirstOrDefault(al => al.ActorId == actorId);
+        if (actorLike == null)
+            throw new NotFoundException("Лайк для этого актера не найден");
+
+        user.ActorLikes.Remove(actorLike);
+        await _unitOfWork.SaveChangesAsync();
+    }
+
     private async Task<User> GetUserWithLikesAsync()
     {
         var userId = _userContext.GetCurrentUserId();

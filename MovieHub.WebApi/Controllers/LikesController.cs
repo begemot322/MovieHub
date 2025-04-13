@@ -23,10 +23,23 @@ public class LikesController : ControllerBase
         return Ok();
     }
     
+    [HttpDelete("movies/{movieId:int}")]
+    public async Task<IActionResult> UnlikeMovie(int movieId)
+    {
+        await _likeService.UnlikeMovieAsync(movieId);
+        return Ok();
+    }
+    
     [HttpPost("actors/{actorId:int}")]
     public async Task<IActionResult> LikeActor(int actorId)
     {
         await _likeService.LikeActorAsync(actorId);
+        return Ok();
+    }
+    [HttpDelete("actors/{actorId:int}")]
+    public async Task<IActionResult> UnlikeActor(int actorId)
+    {
+        await _likeService.UnlikeActorAsync(actorId);
         return Ok();
     }
 }
