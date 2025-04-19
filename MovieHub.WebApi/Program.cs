@@ -1,5 +1,6 @@
 using MovieHub.Application;
 using MovieHub.Infrastructure;
+using MovieHub.Infrastructure.Data;
 using MovieHub.WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,8 +17,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
+    app.UseSwagger();   
     app.UseSwaggerUI();
+    await app.InitialiseDatabaseAsync();
 }
 
 app.UseHttpsRedirection();
