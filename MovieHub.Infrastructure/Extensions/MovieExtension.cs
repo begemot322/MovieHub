@@ -28,7 +28,7 @@ public static class MovieExtension
             : query.OrderBy(GetKeySelector(sortParams.OrderBy));
     }
 
-    public static async Task<PagedResult<Movie>> TtoPageAsync(this IQueryable<Movie> query, PageParams pageParams)
+    public static async Task<PagedResult<Movie>> ToPageAsync(this IQueryable<Movie> query, PageParams pageParams)
     {
         var page = pageParams.Page ?? 1;
         var pageSize = pageParams.PageSize ?? 10;

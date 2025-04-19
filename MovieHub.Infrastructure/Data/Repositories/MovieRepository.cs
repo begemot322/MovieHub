@@ -26,7 +26,7 @@ public class MovieRepository : IMovieRepository
             .Filter(movieFilter)
             .Include(m => m.MovieLikes)
             .AsNoTracking()
-            .TtoPageAsync(pageParams);
+            .ToPageAsync(pageParams);
     }
     
     public async Task<Movie?> GetByIdAsync(int id)
